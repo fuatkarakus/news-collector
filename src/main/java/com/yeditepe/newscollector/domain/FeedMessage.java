@@ -2,6 +2,8 @@ package com.yeditepe.newscollector.domain;
 
 import lombok.Data;
 
+import java.util.Date;
+
 @Data
 public class FeedMessage {
 
@@ -9,6 +11,6 @@ public class FeedMessage {
     private String description;
     private String link;
     private String author;
-    private String guid;
+    private Date date;
 
 }

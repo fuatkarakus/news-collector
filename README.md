@@ -1,2 +1,3 @@
-# news-collector
-collect news into mongodb
+# News Collector
+
+Scrapping news articles from rss feed.  

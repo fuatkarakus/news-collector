@@ -1,10 +1,11 @@
 package com.yeditepe.newscollector.service;
 
+import com.yeditepe.newscollector.domain.FeedMessage;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.List;
 
 
 class RssReaderTest {
@@ -15,7 +16,15 @@ class RssReaderTest {
     void feed() {
         RssReader rssReader = new RssReader();
 
-        log.info(rssReader.feed().toString());
+        log.info(rssReader.readFeed().toString());
+
+    }
+
+    @Test
+    void entries() {
+        RssReader rssReader = new RssReader();
+        List<FeedMessage> list =  rssReader.readEntries(rssReader.readFeed());
+        log.info("" + list);
 
     }
 }

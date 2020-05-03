@@ -1,26 +1,24 @@
 package com.yeditepe.newscollector.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Feed {
 
-    final String title;
-    final String link;
-    final String description;
-    final String language;
-    final String copyright;
-    final String pubDate;
+    private String title;
+    private String link;
+    private String description;
+    private String language;
+    private String copyright;
+    private Date pubDate;
 
-    final List<FeedMessage> entries = new ArrayList<>();
-
-    public Feed(String title, String link, String description, String language,
-                String copyright, String pubDate) {
-        this.title = title;
-        this.link = link;
-        this.description = description;
-        this.language = language;
-        this.copyright = copyright;
-        this.pubDate = pubDate;
-    }
+    private List<FeedMessage> entries = new ArrayList<>();
 }
