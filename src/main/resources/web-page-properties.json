@@ -1,0 +1,19 @@
+[
+  {
+    "rss" : "dailysabah",
+    "body": ".article_body",
+    "lastUpdateDate": ".article_info_text",
+  },
+  {
+    "rss" : "",
+    "body": "div.col-md-9:nth-child(2)",
+    "lastUpdateDate": "div.col-md-9:nth-child(2) > label:nth-child(1)",
+    "image" : ".article_top_image_widget > div:nth-child(1) > a:nth-child(1)"
+  },
+  {
+    "rss" : "",
+    "body": "html body.with_ad.hidden_main_menu.small_top_logo.showSearchButton.loaded_body section.hidden_main_menu.with_ad.small_top_logo.showSearchButton div.container div.row div.col-md-12.noPadding.col-xs-12 div.row div.col-lg-12 div.mobileRemoveSpace div.article_body_text div.article_body",
+    "lastUpdateDate": "/html/body/section/div/div[3]/div/div[6]/div/div[1]/div/div[1]/div",
+    "image" : ".article_top_image_widget > div:nth-child(1) > a:nth-child(1)"
+  }
+]

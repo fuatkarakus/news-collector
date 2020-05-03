@@ -21,4 +21,12 @@ public class NewsService {
         return newsRepository.findTop10ByOrderByDateDesc();
     }
 
+    public News save(final News news){
+        return newsRepository.save(news);
+    }
+
+    public List<News> saveAll(final List<News> news){
+        return newsRepository.saveAll(news);
+    }
+
 }
