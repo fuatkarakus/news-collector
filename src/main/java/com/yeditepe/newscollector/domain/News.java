@@ -1,6 +1,5 @@
 package com.yeditepe.newscollector.domain;
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.data.annotation.CreatedDate;
@@ -16,7 +15,6 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Document(collection = "news")
-@Builder
 public class News extends RepresentationModel<News> {
 
     @Id

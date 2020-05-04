@@ -1,30 +1,31 @@
-package com.yeditepe.newscollector.service;
+package com.yeditepe.newscollector.util;
 
 import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndFeed;
+import com.rometools.rome.feed.synd.SyndFeedImpl;
 import com.rometools.rome.io.FeedException;
 import com.rometools.rome.io.SyndFeedInput;
 import com.rometools.rome.io.XmlReader;
 import com.yeditepe.newscollector.domain.Feed;
 import com.yeditepe.newscollector.domain.FeedMessage;
+import com.yeditepe.newscollector.domain.News;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class RssReader {
 
     private static final Logger log = LoggerFactory.getLogger(RssReader.class);
 
-    public RssReader() { }
+    private RssReader() { }
 
-    public Feed read(String url){
+    public static Feed read(String url){
         URL feedSource;
         SyndFeedInput input = new SyndFeedInput();
-        SyndFeed feed = null;
+        SyndFeed feed = new SyndFeedImpl();
         try {
             feedSource = new URL(url);
             feed = input.build(new XmlReader(feedSource));
@@ -35,7 +36,27 @@ public class RssReader {
         return convertSyndFeed(feed);
     }
 
-    public Feed convertSyndFeed(SyndFeed syndFeed) {
+    public static List<News> fillNewsWithRSS( Feed feed ) {
+
+        List<News> newsSet = new ArrayList<>();
+
+        for (FeedMessage feedMessage: feed.getEntries()) {
+
+            News news = new News();
+            news.setPublisher(feed.getTitle());
+            news.setLink(feedMessage.getLink());
+            news.setTitle(feedMessage.getTitle());
+            news.setDate(feedMessage.getDate());
+            news.setAuthor(feedMessage.getAuthor());
+            news.setCreatedDate(new Date());
+
+            newsSet.add(news);
+
+        }
+        return newsSet;
+    }
+
+    public static Feed convertSyndFeed(SyndFeed syndFeed) {
 
         final Feed feed = new Feed();
 
@@ -52,7 +73,7 @@ public class RssReader {
 
     }
 
-    public List<FeedMessage> readEntries(SyndFeed feed){
+    public static List<FeedMessage> readEntries(SyndFeed feed){
 
         List<FeedMessage> feedMessages = new ArrayList<>();
 

@@ -5,6 +5,7 @@ import com.rometools.rome.io.FeedException;
 import com.rometools.rome.io.SyndFeedInput;
 import com.rometools.rome.io.XmlReader;
 import com.yeditepe.newscollector.domain.FeedMessage;
+import com.yeditepe.newscollector.util.RssReader;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,8 +38,8 @@ class RssReaderTest {
 
     @Test
     void entries() {
-        RssReader rssReader = new RssReader();
-        List<FeedMessage> list =  rssReader.read("https://www.dailysabah.com/rssFeed/10/1").getEntries();
+
+        List<FeedMessage> list =  RssReader.read("https://www.dailysabah.com/rssFeed/10/1").getEntries();
         log.info("" + list);
 
     }

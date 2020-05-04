@@ -1,4 +1,4 @@
-package com.yeditepe.newscollector.service;
+package com.yeditepe.newscollector.util;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -15,7 +15,9 @@ public class JsoupUtil {
 
     private static final Logger log = LoggerFactory.getLogger(JsoupUtil.class);
 
-    public Elements getElementByQuery(String newsUrl, String cssQuery) {
+    private JsoupUtil() {}
+
+    public static Elements getElementByQuery(String newsUrl, String cssQuery) {
         Elements select = null;
         try {
             select = Jsoup.connect(newsUrl)
@@ -27,7 +29,7 @@ public class JsoupUtil {
         return select;
     }
 
-    public String getContent(String newsUrl, String cssQuery){
+    public static String getContent(String newsUrl, String cssQuery){
         Elements elements = getElementByQuery(newsUrl, cssQuery);
 
         Elements p = elements.first().getElementsByTag("p");
@@ -45,7 +47,7 @@ public class JsoupUtil {
         return content.toString();
     }
 
-    public List<String> getRssLinksFromGivenUrl(String url, String mustContain) throws IOException {
+    public static List<String> getRssLinksFromGivenUrl(String url, String mustContain) throws IOException {
 
         List<String> rssLinks = new ArrayList<>();
 
