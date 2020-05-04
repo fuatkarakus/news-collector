@@ -49,7 +49,7 @@ class JsoupUtilTest {
 
         String url = "https://www.dailysabah.com/rssFeed/home-page";
         List<String> news;
-        List<String> rss = parser.getRssLinksFromGivenUrl(url, "rssFeed");
+        List<String> rss = parser.getRssLinksFromGivenUrl(DailySabahCrawler.URL, "rssFeed");
         if (rss.stream().noneMatch(i -> i.contains(DailySabahCrawler.DOMAIN))) {
 
              news = (rss.stream().map(i -> DailySabahCrawler.DOMAIN + i).collect(Collectors.toList()));
