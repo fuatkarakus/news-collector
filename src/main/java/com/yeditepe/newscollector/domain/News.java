@@ -10,6 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.hateoas.RepresentationModel;
 
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @EqualsAndHashCode(callSuper = true)
@@ -18,30 +19,32 @@ import java.util.Date;
 public class News extends RepresentationModel<News> {
 
     @Id
-    Long id;
-
+    @NotNull
     String link;
 
-    // newspaper
     @Indexed
     String publisher;
 
     @TextIndexed
+    @NotNull
     String title;
+
+    @TextIndexed
+    String description;
 
     @TextIndexed
     String content;
 
-    // writer if any
+    @Indexed
     String author;
 
-    // published date if any
     @Indexed
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
     Date date;
 
     @CreatedDate
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+    @NotNull
     Date createdDate;
 
 }

@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.util.Set;
 
 @Service
@@ -24,13 +23,13 @@ public class CrawlerService {
         this.newsService = newsService;
     }
 
-    @Scheduled(fixedDelay = 1000, initialDelay = 1000)
-    public void runCrawlers() throws IOException {
+    @Scheduled(fixedRateString = "${fixedRate.in.milliseconds}")
+    public void runCrawlers() {
         log.info("Starting crawlers... ");
 
         Set<News> news = spiderFacade.startCollectingNews();
 
         log.debug("Total Collected News Size: {}", news.size());
-        news.forEach(i -> newsService.save(i));
+        news.forEach(i -> newsService.insert(i));
     }
 }

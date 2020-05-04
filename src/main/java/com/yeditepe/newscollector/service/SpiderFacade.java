@@ -1,13 +1,15 @@
 package com.yeditepe.newscollector.service;
 
+import com.yeditepe.newscollector.domain.News;
 import com.yeditepe.newscollector.spider.AnadoluAgencySpider;
 import com.yeditepe.newscollector.spider.DailySabahSpider;
 import com.yeditepe.newscollector.spider.NewsSpider;
-import com.yeditepe.newscollector.domain.News;
 
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class SpiderFacade {
 
@@ -23,7 +25,11 @@ public class SpiderFacade {
 
         Set<News> news = new HashSet<>();
 
-        crawlers.forEach( i ->  news.addAll(i.crawl()));
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+
+        executorService.submit(() -> {
+            crawlers.forEach( i ->  news.addAll(i.crawl()));
+        });
 
         return news;
     }

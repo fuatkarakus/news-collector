@@ -9,12 +9,16 @@ import com.rometools.rome.io.XmlReader;
 import com.yeditepe.newscollector.domain.Feed;
 import com.yeditepe.newscollector.domain.FeedMessage;
 import com.yeditepe.newscollector.domain.News;
+import lombok.NonNull;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.validation.constraints.NotNull;
 import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class RssReader {
 
@@ -36,7 +40,7 @@ public class RssReader {
         return convertSyndFeed(feed);
     }
 
-    public static List<News> fillNewsWithRSS( Feed feed ) {
+    public static List<News> fillNewsWithRSS(@NotNull Feed feed ) {
 
         List<News> newsSet = new ArrayList<>();
 
@@ -46,6 +50,7 @@ public class RssReader {
             news.setPublisher(feed.getTitle());
             news.setLink(feedMessage.getLink());
             news.setTitle(feedMessage.getTitle());
+            news.setDescription(feedMessage.getDescription());
             news.setDate(feedMessage.getDate());
             news.setAuthor(feedMessage.getAuthor());
             news.setCreatedDate(new Date());
@@ -56,7 +61,7 @@ public class RssReader {
         return newsSet;
     }
 
-    public static Feed convertSyndFeed(SyndFeed syndFeed) {
+    public static Feed convertSyndFeed(@NonNull SyndFeed syndFeed) {
 
         final Feed feed = new Feed();
 
@@ -73,7 +78,7 @@ public class RssReader {
 
     }
 
-    public static List<FeedMessage> readEntries(SyndFeed feed){
+    public static List<FeedMessage> readEntries(@NonNull SyndFeed feed){
 
         List<FeedMessage> feedMessages = new ArrayList<>();
 
