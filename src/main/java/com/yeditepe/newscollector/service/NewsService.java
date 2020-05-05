@@ -27,6 +27,10 @@ public class NewsService {
         return newsRepository.findTop10ByOrderByDateDesc();
     }
 
+    public List<News> getAllNews(){
+        return newsRepository.findAll();
+    }
+
     public void insert(final News news){
         if (newsRepository.findByLink(news.getLink()).isEmpty()) {
             newsRepository.save(news);
@@ -59,9 +63,6 @@ public class NewsService {
         return newsRepository.findByDescriptionLike(title);
     }
 
-    public Set<String> getPublishers() {
-        return newsRepository.findDistinctPublisher();
-    }
 
     public List<News> getAllByText(String text) {
         TextCriteria criteria = TextCriteria.forDefaultLanguage().matchingAny(text);

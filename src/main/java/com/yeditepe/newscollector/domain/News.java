@@ -8,15 +8,13 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.hateoas.RepresentationModel;
 
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
 @Document(collection = "news")
-public class News extends RepresentationModel<News> {
+public class News {
 
     @Id
     @NotNull

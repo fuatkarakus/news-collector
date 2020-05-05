@@ -22,8 +22,6 @@ public interface NewsRepository extends MongoRepository<News, String> {
 
     List<News> findByContentLike(String link);
 
-    Set<String> findDistinctPublisher();
-
     List<News> findAllBy(TextCriteria criteria);
 
     List<News> findByDescriptionLike(String description);

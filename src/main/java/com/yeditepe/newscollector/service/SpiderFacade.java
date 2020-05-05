@@ -1,37 +1,28 @@
 package com.yeditepe.newscollector.service;
 
-import com.yeditepe.newscollector.domain.News;
 import com.yeditepe.newscollector.spider.AnadoluAgencySpider;
 import com.yeditepe.newscollector.spider.DailySabahSpider;
-import com.yeditepe.newscollector.spider.NewsSpider;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
+@Service
 public class SpiderFacade {
 
-    private final List<NewsSpider> crawlers;
+    private static final Logger log = LoggerFactory.getLogger(SpiderFacade.class);
 
-    public SpiderFacade() {
-        this.crawlers = List.of(
-                new AnadoluAgencySpider(),
-                new DailySabahSpider());
+    AnadoluAgencySpider anadoluAgencySpider;
+    DailySabahSpider dailySabahSpider;
+
+    public SpiderFacade(AnadoluAgencySpider anadoluAgencySpider, DailySabahSpider dailySabahSpider) {
+        this.anadoluAgencySpider = anadoluAgencySpider;
+        this.dailySabahSpider = dailySabahSpider;
     }
 
-    public Set<News> startCollectingNews() {
-
-        Set<News> news = new HashSet<>();
-
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
-
-        executorService.submit(() -> {
-            crawlers.forEach( i ->  news.addAll(i.crawl()));
-        });
-
-        return news;
+    public void startCollectingNews() {
+        log.debug("executorService initialize...");
+        //  dailySabahSpider.crawl();
+        anadoluAgencySpider.crawl();
     }
 
 }

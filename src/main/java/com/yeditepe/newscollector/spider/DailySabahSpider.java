@@ -2,10 +2,13 @@ package com.yeditepe.newscollector.spider;
 
 import com.yeditepe.newscollector.domain.Feed;
 import com.yeditepe.newscollector.domain.News;
+import com.yeditepe.newscollector.service.NewsService;
 import com.yeditepe.newscollector.util.JsoupUtil;
 import com.yeditepe.newscollector.util.RssReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,6 +16,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+@Service
 public class DailySabahSpider extends NewsSpider {
 
     private static final Logger log = LoggerFactory.getLogger(DailySabahSpider.class);
@@ -22,12 +26,15 @@ public class DailySabahSpider extends NewsSpider {
     public static final String RSS_PREFIX = "rssFeed";
     public static final String CONTENT_QUERY = ".article_body";
 
-    @Override
-    public Set<News> crawl() {
-        return collectNews();
+    private NewsService newsService;
+
+    @Autowired
+    public DailySabahSpider(NewsService newsService) {
+        this.newsService = newsService;
     }
 
-    public Set<News> collectNews() {
+    @Override
+    public void crawl() {
         Set<News> news = new HashSet<>();
         List<String> rssLinks = new ArrayList<>();
         try {
@@ -46,9 +53,8 @@ public class DailySabahSpider extends NewsSpider {
         }
 
         log.debug("News Size {}", news.size());
-        return news;
-
     }
+
 
     public List<News> crawlNews ( String rss ) {
         Feed feed =  RssReader.read(rss);
@@ -60,7 +66,7 @@ public class DailySabahSpider extends NewsSpider {
                     .getContent(i.getLink(), CONTENT_QUERY);
 
             i.setContent(content);
-
+            newsService.insert(i);
         });
 
         return news;

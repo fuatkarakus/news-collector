@@ -24,26 +24,31 @@ public class JsoupUtil {
                     .get()
                     .select(cssQuery);
         } catch (IOException e) {
-            log.error("Connection error: {}", e.getMessage());
+            log.error("Connection error: {}, url {}", e.getMessage(), newsUrl);
         }
         return select;
     }
 
     public static String getContent(String newsUrl, String cssQuery){
-        Elements elements = getElementByQuery(newsUrl, cssQuery);
 
-        Elements p = elements.first().getElementsByTag("p");
-
+        log.debug("url {}, cssQuery {}", newsUrl, cssQuery);
         StringBuilder content= new StringBuilder();
-        for (Element x: p) {
-            // added for -> www.aa.com.tr
-            if (!x.getElementsByTag("strong").isEmpty()){
-                content.append(x.text()).append(" ");
-            }else {
-                content.append(x.text());
-            }
-        }
+        try {
+            Elements elements = getElementByQuery(newsUrl, cssQuery);
+            Elements p = elements.first().getElementsByTag("p");
 
+            for (Element x: p) {
+                // added for -> www.aa.com.tr
+                if (!x.getElementsByTag("strong").isEmpty()){
+                    content.append(x.text()).append(" ");
+                }else {
+                    content.append(x.text());
+                }
+            }
+        }catch (Exception e) {
+            log.error("ERROR url {}, cssQuery {}", newsUrl, cssQuery);
+            content.append( "Exception Occured" );
+        }
         return content.toString();
     }
 
