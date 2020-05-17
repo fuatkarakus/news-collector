@@ -40,7 +40,7 @@
     },
     mounted() {
       axios
-        .get(process.env.VUE_APP_BASE_URL + '/news')
+        .get('/api/news')
         .then(response => {
           this.news = response.data;
           console.log(this.news[0]);
@@ -48,6 +48,9 @@
         .catch(err => {
           console.log(err);
         });
+    },
+    methods() {
+
     }
   };
 </script>
