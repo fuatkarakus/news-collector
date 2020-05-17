@@ -1,6 +1,6 @@
 <template>
   <b-container>
-    <div v-if="meals.length">
+    <div v-if="news.length">
       <b-row>
         <div v-bind:key="data.index" v-for="data in meals">
           <b-col l="4">
@@ -29,23 +29,25 @@
 </template>
 
 <script>
-import axios from 'axios';
-export default {
-  name: 'News',
-  data() {
-    return {
-      meals: []
-    };
-  },
-  mounted() {
-    axios
-      .get(process.env.VUE_APP_BASE_URL + '/news')
-      .then(response => {
-        this.meals = response.data.categories;
-      })
-      .catch(err => {
-        console.log(err);
-      });
-  }
-};
+  import axios from 'axios';
+
+  export default {
+    name: 'News',
+    data() {
+      return {
+        news: []
+      };
+    },
+    mounted() {
+      axios
+        .get(process.env.VUE_APP_BASE_URL + '/news')
+        .then(response => {
+          this.news = response.data;
+          console.log(this.news[0]);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  };
 </script>
