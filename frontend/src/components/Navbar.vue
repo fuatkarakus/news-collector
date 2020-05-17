@@ -14,7 +14,13 @@
                 placeholder="Search for a meal"
                 v-model="meal"
               ></b-form-input>
-              <b-button size="sm" class="my-2 my-sm-0" type="submit" @click.prevent="getMeal">Search</b-button>
+              <b-button
+                size="sm"
+                class="my-2 my-sm-0"
+                type="submit"
+                @click.prevent="getMeal"
+                >Search</b-button
+              >
             </b-nav-form>
             <b-nav-item-dropdown right>
               <!-- Using 'button-content' slot -->
@@ -29,13 +35,13 @@
   </div>
 </template>
 <script>
-  export default {
-    name: "Navbar",
-    data() {
-      return {
-        meal: ""
-      };
-    },
-    methods: {}
-  };
+export default {
+  name: 'Navbar',
+  data() {
+    return {
+      meal: ''
+    };
+  },
+  methods: {}
+};
 </script>
