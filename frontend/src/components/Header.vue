@@ -8,8 +8,8 @@
         <b-collapse id="nav-collapse" is-nav>
           <!-- Right aligned nav items -->
           <b-navbar-nav>
-            <b-nav-item :to="{ name: 'Home'}">Home</b-nav-item>
-            <b-nav-item :to="{ name: 'About'}">About</b-nav-item>
+            <b-nav-item :to="{ name: 'Home' }">Home</b-nav-item>
+            <b-nav-item :to="{ name: 'About' }">About</b-nav-item>
           </b-navbar-nav>
         </b-collapse>
       </b-container>
@@ -18,14 +18,12 @@
 </template>
 
 <script>
-
-  export default {
-    name: 'Navbar',
-    data() {
-      return {
-        meal: ''
-      };
-    }
-  };
-
+export default {
+  name: 'Header',
+  data() {
+    return {
+      meal: ''
+    };
+  }
+};
 </script>

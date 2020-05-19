@@ -51,7 +51,7 @@ public class RssReader {
             news.setLink(feedMessage.getLink());
             news.setTitle(feedMessage.getTitle());
             news.setDescription(feedMessage.getDescription());
-            news.setDate(feedMessage.getDate());
+            news.setDate( (feedMessage.getDate() == null) ? feed.getPubDate() : feedMessage.getDate());
             news.setAuthor(feedMessage.getAuthor());
             news.setCreatedDate(new Date());
 
