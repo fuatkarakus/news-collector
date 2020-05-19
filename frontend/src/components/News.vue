@@ -4,11 +4,13 @@
       <b-row>
         <div>
           <div v-bind:key="data.index" v-for="data in news" class="blog-post">
-            <h2 class="blog-post-title" v-bind:href="data.link">
-              {{ data.title }}
+            <h2 class="blog-post-title" >
+              <a v-bind:href="data.link" target="_blank">
+                {{ data.title }}
+              </a>
             </h2>
             <p>
-              {{ data.description }}
+              {{ data.content }}
             </p>
             <div class="blog-post-meta">
               <time v-if="data.date !== null">
@@ -17,6 +19,9 @@
               <time v-else>
                 {{ data.createdDate }}
               </time>
+              <div class="post-tags">
+                <a> {{ data.publisher }}</a>
+              </div>
             </div>
           </div>
         </div>
