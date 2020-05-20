@@ -4,12 +4,10 @@ import com.yeditepe.newscollector.domain.News;
 import com.yeditepe.newscollector.repository.NewsRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.query.TextCriteria;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Set;
 
 @Service
 public class NewsService {
@@ -18,7 +16,6 @@ public class NewsService {
 
     private final NewsRepository newsRepository;
 
-    @Autowired
     public NewsService(NewsRepository newsRepository) {
         this.newsRepository = newsRepository;
     }
@@ -33,6 +30,7 @@ public class NewsService {
 
     public void insert(final News news){
         if (newsRepository.findByLink(news.getLink()).isEmpty()) {
+            log.info(" Inserted {}" ,news.getLink());
             newsRepository.save(news);
         }
     }

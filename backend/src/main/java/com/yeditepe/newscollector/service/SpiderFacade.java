@@ -2,27 +2,31 @@ package com.yeditepe.newscollector.service;
 
 import com.yeditepe.newscollector.spider.AnadoluAgencySpider;
 import com.yeditepe.newscollector.spider.DailySabahSpider;
+import com.yeditepe.newscollector.spider.NewsSpider;
+import lombok.Getter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
 
-@Service
+import java.util.Arrays;
+import java.util.List;
+
+@Getter
 public class SpiderFacade {
 
     private static final Logger log = LoggerFactory.getLogger(SpiderFacade.class);
 
-    AnadoluAgencySpider anadoluAgencySpider;
-    DailySabahSpider dailySabahSpider;
+    private final List<NewsSpider> spiderList;
 
-    public SpiderFacade(AnadoluAgencySpider anadoluAgencySpider, DailySabahSpider dailySabahSpider) {
-        this.anadoluAgencySpider = anadoluAgencySpider;
-        this.dailySabahSpider = dailySabahSpider;
+    public SpiderFacade(NewsService newsService) {
+        spiderList = Arrays.asList(
+                new AnadoluAgencySpider(newsService),
+                new DailySabahSpider(newsService)
+        );
     }
 
     public void startCollectingNews() {
         log.debug("executorService initialize...");
-        //  dailySabahSpider.crawl();
-        anadoluAgencySpider.crawl();
+        spiderList.forEach(NewsSpider::crawl);
     }
 
 }

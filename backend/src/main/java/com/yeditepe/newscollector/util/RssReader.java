@@ -91,7 +91,6 @@ public class RssReader {
             message.setAuthor(entry.getAuthor());
             message.setLink(entry.getLink());
             message.setDate(entry.getPublishedDate());
-            //message.setCategory(entry.getCategories().get(0).getName());
             feedMessages.add(message);
 
         }

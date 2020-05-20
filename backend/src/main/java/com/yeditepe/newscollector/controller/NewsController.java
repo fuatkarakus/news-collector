@@ -2,7 +2,6 @@ package com.yeditepe.newscollector.controller;
 
 import com.yeditepe.newscollector.domain.News;
 import com.yeditepe.newscollector.service.NewsService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,7 +13,6 @@ public class NewsController {
 
     private final NewsService newsService;
 
-    @Autowired
     NewsController (NewsService newsService) {
         this.newsService = newsService;
     }
@@ -34,7 +32,7 @@ public class NewsController {
         return newsService.getAllByText(key);
     }
 
-    @GetMapping(value = "/link/{link}")
+    @GetMapping(value = "/link/{key}")
     public List<News> getLinkLike(@PathVariable String key)  {
         return newsService.getByLinkLike(key);
     }
