@@ -7,7 +7,7 @@
         <groupId>com.yeditepe</groupId>
         <artifactId>newscollector</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/> <!-- lookup parent from repository -->
+        <relativePath>../</relativePath>
     </parent>
 
     <artifactId>backend</artifactId>
