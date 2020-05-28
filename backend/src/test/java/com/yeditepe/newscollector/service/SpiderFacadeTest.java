@@ -10,19 +10,19 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 public class SpiderFacadeTest {
 
-    SpiderFacade spiderFacade;
-
-    @Mock
-    NewsService newsService;
-
-    @BeforeEach
-    void init(){
-        spiderFacade = new SpiderFacade(newsService);
-    }
-
-    @Test
-    void shouldCreateSpiders(){
-        Assertions.assertFalse(spiderFacade.getSpiderList().isEmpty());
-    }
+//    SpiderFacade spiderFacade;
+//
+//    @Mock
+//    NewsService newsService;
+//
+//    @BeforeEach
+//    void init(){
+//        spiderFacade = new SpiderFacade(newsService);
+//    }
+//
+//    @Test
+//    void shouldCreateSpiders(){
+//        Assertions.assertFalse(spiderFacade.getSpiderList().isEmpty());
+//    }
 
 }

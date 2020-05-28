@@ -1,12 +1,9 @@
 package com.yeditepe.newscollector.spider;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.yeditepe.newscollector.domain.News;
 
-public abstract class NewsSpider {
+import java.util.Set;
+import java.util.function.Supplier;
 
-    public void crawl() {
-    }
-
-    protected Logger log() { return LoggerFactory.getLogger(getClass()); }
+interface NewsSpider extends Supplier<Set<News>> {
 }

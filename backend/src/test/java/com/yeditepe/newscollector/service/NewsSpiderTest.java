@@ -14,7 +14,7 @@ public class NewsSpiderTest {
     @BeforeEach
     void setup() {
         NewsService newsService = mock(NewsService.class);
-        dailySabahSpider = new DailySabahSpider(newsService);
+        dailySabahSpider = new DailySabahSpider();
     }
 
     @Test
