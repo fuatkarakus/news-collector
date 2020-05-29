@@ -1,6 +1,7 @@
 package com.yeditepe.newscollector.spider;
 
 import com.yeditepe.newscollector.domain.News;
+import lombok.Getter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,6 +11,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.function.Supplier;
 
+@Getter
 public class CompositeSpider implements NewsSpider {
 
     private static final Logger log = LoggerFactory.getLogger(CompositeSpider.class);

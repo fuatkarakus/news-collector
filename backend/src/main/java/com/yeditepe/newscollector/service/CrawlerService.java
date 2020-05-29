@@ -10,13 +10,8 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.stream.Collectors;
 
 @Service
 public class CrawlerService {
@@ -34,8 +29,6 @@ public class CrawlerService {
     public void runCrawlers() {
         log.info("Starting crawlers... ");
 
-        ExecutorService executor = Executors.newFixedThreadPool(25);
-
         CompositeSpider spider = new CompositeSpider(
                 new AnadoluAgencySpider(),
                 new DailySabahSpider()
@@ -44,7 +37,7 @@ public class CrawlerService {
         CompletableFuture<Set<News>> all = CompletableFuture.supplyAsync(() -> {
             log.info("Task execution started.");
             return spider.get();
-        }, executor);
+        });
 
         CompletableFuture<Void> allOf = CompletableFuture.allOf(all);
         allOf.whenComplete((aVoid, throwable) -> {
