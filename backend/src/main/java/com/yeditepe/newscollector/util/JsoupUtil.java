@@ -45,8 +45,8 @@ public class JsoupUtil {
                     content.append(x.text());
                 }
             }
-        }catch (Exception e) {
-            log.error("ERROR url {}, cssQuery {}", newsUrl, cssQuery);
+        } catch (NullPointerException e) {
+            log.error("ERROR exception : {}, url {}, cssQuery {}", e, newsUrl, cssQuery);
             content.append( "Exception Occured" );
         }
         return content.toString();

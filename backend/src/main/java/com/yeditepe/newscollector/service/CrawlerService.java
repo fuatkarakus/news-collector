@@ -10,15 +10,21 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 
 @Service
 public class CrawlerService {
 
     private static final Logger log = LoggerFactory.getLogger(CrawlerService.class);
 
-    NewsService newsService;
+    private final NewsService newsService;
 
     public CrawlerService(NewsService newsService) {
         this.newsService = newsService;
@@ -34,16 +40,23 @@ public class CrawlerService {
                 new DailySabahSpider()
         );
 
-        CompletableFuture<Set<News>> all = CompletableFuture.supplyAsync(() -> {
-            log.info("Task execution started.");
-            return spider.get();
-        });
+        List<CompletableFuture<Set<News>>> futures = new ArrayList<>();
 
-        CompletableFuture<Void> allOf = CompletableFuture.allOf(all);
-        allOf.whenComplete((aVoid, throwable) -> {
-           log.info("Completed allOf");
-        });
-        allOf.join();
+        spider.getComponents()
+                .forEach( spi -> {
+                    futures.add(CompletableFuture.supplyAsync(spi));
+                    log.info("Spider Type: {}", spi.getClass().getSimpleName());
+                });
+
+        Set<News> result = futures.stream()
+                .map(CompletableFuture::join)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toSet());
+
+        ExecutorService executorService = Executors.newSingleThreadExecutor();
+
+        executorService.submit(() -> newsService.saveAll(result));
 
     }
+
 }

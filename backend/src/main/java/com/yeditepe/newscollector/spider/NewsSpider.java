@@ -5,5 +5,5 @@ import com.yeditepe.newscollector.domain.News;
 import java.util.Set;
 import java.util.function.Supplier;
 
-interface NewsSpider extends Supplier<Set<News>> {
+public interface NewsSpider extends Supplier<Set<News>> {
 }

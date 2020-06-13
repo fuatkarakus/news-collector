@@ -20,7 +20,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2).select()
                 .apis(RequestHandlerSelectors
                         .basePackage("com.yeditepe.newscollector.controller"))
-                .paths(PathSelectors.regex("/api.*"))
+                .paths(PathSelectors.regex("/news.*"))
                 .build()
                 .apiInfo(apiEndPointsInfo());
     }

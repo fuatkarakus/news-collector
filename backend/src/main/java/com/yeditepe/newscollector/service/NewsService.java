@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.mongodb.core.query.TextCriteria;
 import org.springframework.stereotype.Service;
 
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -35,7 +36,7 @@ public class NewsService {
         }
     }
 
-    public List<News> saveAll(final List<News> news){
+    public List<News> saveAll(final Collection<News> news){
         return newsRepository.saveAll(news);
     }
 
