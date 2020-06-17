@@ -10,10 +10,11 @@ import static org.mockito.Mockito.mock;
 public class NewsSpiderTest {
 
     private DailySabahSpider dailySabahSpider;
+    NewsService newsService;
 
     @BeforeEach
     void setup() {
-        NewsService newsService = mock(NewsService.class);
+        newsService = mock(NewsService.class);
         dailySabahSpider = new DailySabahSpider();
     }
 

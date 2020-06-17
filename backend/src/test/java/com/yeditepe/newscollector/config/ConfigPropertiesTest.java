@@ -1,7 +1,8 @@
 package com.yeditepe.newscollector.config;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.springframework.test.context.TestPropertySource;
 
+@TestPropertySource("classpath:test.properties")
 public class ConfigPropertiesTest {
 
 }
